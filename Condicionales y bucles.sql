@@ -13,6 +13,4 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('-----------------------------------');
         multiplo := 1;
     end loop;
-
-
 END;
