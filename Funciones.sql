@@ -18,7 +18,6 @@ select titulo, autor, precio, f_coste(precio) from libros;
 
 
 
-
 /*
 create or replace function f_diasemana(numero int)
 return varchar2
