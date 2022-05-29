@@ -29,7 +29,7 @@ declare
 begin
     open c_cursor2; /*abrir cursor*/
     fetch c_cursor2 into v_docu, v_nom, v_ape, v_suel; /*extrae todos los registros*/
-    close c_cursor2;
+    close c_cursor2; /*cerrar cursor para evitar errores*/
     dbms_output.put_line('documento; ' || v_docu);
     dbms_output.put_line('nombre; ' || v_nom);
     dbms_output.put_line('apellido; ' || v_ape);
@@ -54,6 +54,27 @@ begin
         dbms_output.put_line('==NO HAY EMPLEADOS DISPONIBLES==');
     end if;
 end;
+/
+/*----------------------------------------------------------------------------------------------------------------------------*/
+
+declare
+    v_nom productos.nombre_producto%type;
+    v_pre productos.precio%type;
+    
+    cursor c_productos (idprod productos.id_producto%type) is
+        select nombre_producto, precio from productos where id_producto = idprod;
+begin
+    open c_productos(1);
+    loop
+        fetch c_productos into v_nom, v_pre;
+        exit when c_productos%notfound;
+        dbms_output.put_line('Articulo: ' || v_nom || ', precio ' || v_pre);
+    end loop;
+    close c_productos;
+end;
+
+
+
 
 
 
