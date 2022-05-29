@@ -1,7 +1,33 @@
 set serveroutput on;
+create sequence s_autoinAlumnos
+    start with 1
+    increment by 1
+;
 
-/*select * from alumnos;*/
+create or replace trigger tr_autoinAlumnos
+before insert on alumnos
+for each row
+declare
+    valor number := 0;
+begin
+    select s_autoinAlumnos.nextval into valor from dual;
+    :new.id := valor;
+end tr_autoinAlumnos;
 
+
+
+select * from alumnos;
+
+insert into alumnos (nombre, apellido) values ('Pedro', 'Jimenez');
+insert into alumnos (nombre, apellido) values ('Antonio', 'Lopez');
+insert into alumnos (nombre, apellido) values ('Juan', 'Garcia');
+insert into alumnos (nombre, apellido) values ('Felipe', 'Lozano');
+
+
+
+
+
+/*
 create or replace trigger tr_autoincrement
 before insert on alumnos
 for each row
@@ -25,4 +51,4 @@ create table alumnos(
     nombre varchar2(20),
     apellido varchar2(20)
 );
-
+*/
