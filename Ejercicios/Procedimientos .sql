@@ -195,8 +195,11 @@ execute borrar_emp(7937);
 /*----------------------------------------------------------------------------------------------------------------------------*/
 /*Ejercicio 14*/
 
+create or replace procedure mod_loc (v_num in number, v_loc in varchar2) as
+begin
+    update dept set loc = v_loc where deptno = v_num;
+end;
 
-
-
-
+execute mod_loc(30, 'MADRID');
+select * from dept;
 
